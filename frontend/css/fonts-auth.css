@@ -1,0 +1,55 @@
+/* ============================================================
+   KYBERS.OS — Auth Pages Font Configuration
+   ============================================================ */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Montserrat:wght@700;800;900&family=Roboto:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap');
+
+/* Auth Font Variables */
+:root {
+  --font-auth-body: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-auth-heading: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-auth-button: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-auth-mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* Auth Page Global */
+body {
+  font-family: var(--font-auth-body);
+}
+
+/* Auth Headings */
+.auth-title,
+.auth-logo-text {
+  font-family: var(--font-auth-heading);
+  font-weight: 800;
+}
+
+/* Auth Forms */
+.form-label {
+  font-family: var(--font-auth-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.form-input {
+  font-family: var(--font-auth-body);
+}
+
+/* Auth Buttons */
+.btn-submit,
+.auth-link {
+  font-family: var(--font-auth-button);
+  font-weight: 600;
+}
+
+/* Auth Date Display */
+.auth-date {
+  font-family: var(--font-auth-mono);
+}
+
+/* Toast Notifications */
+.toast {
+  font-family: var(--font-auth-body);
+}

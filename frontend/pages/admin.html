@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel — KYBERS.OS</title>
+  <link rel="stylesheet" href="../css/fonts-admin.css" />
+  <link rel="stylesheet" href="../css/admin.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><path d='M16 4 L28 9 L28 18 Q28 27 16 31 Q4 27 4 18 L4 9 Z' fill='none' stroke='%23ff0000' stroke-width='1.5'/></svg>" />
+</head>
+<body>
+<div class="admin-wrapper">
+
+  <!-- ═══ SIDEBAR ═══════════════════════════════════════════ -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <a href="../index.html" class="sidebar-logo">
+      <img src="../images/logo.webp" alt="Logo" onerror="this.style.display='none'" />
+      <div>
+        <span class="sidebar-logo-text">KYBERS.OS
+        </span><br>
+        <span style="font-size:0.6rem;color:var(--text-muted);font-family:var(--font-display);letter-spacing:0.1em;">ADMIN PANEL</span>
+      </div>
+    </a>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-title">Asosiy</div>
+
+      <button type="button" class="sidebar-link active" data-section="dashboard">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Boshqaruv paneli
+      </button>
+
+      <button type="button" class="sidebar-link" data-section="apps">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        Ilovalar
+      </button>
+
+      <button type="button" class="sidebar-link" data-section="users">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Foydalanuvchilar
+        <span class="sidebar-badge" id="newUsersBadge" style="display:none">0</span>
+      </button>
+
+      <div class="nav-section-title">Moliya</div>
+
+      <button type="button" class="sidebar-link" data-section="payments" id="paymentsNavBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+        To'lov tekshiruvi
+        <span class="sidebar-badge" id="pendingBadge" style="display:none">0</span>
+      </button>
+
+      <div class="nav-section-title">Aloqa</div>
+
+      <button type="button" class="sidebar-link" data-section="messages">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Murojaatlar
+        <span class="sidebar-badge" id="messagesBadge" style="display:none">0</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="sidebar-avatar" id="sidebarAvatar">A</div>
+        <div>
+          <div class="sidebar-user-name" id="sidebarName">Admin</div>
+          <div class="sidebar-user-role">Super Admin</div>
+        </div>
+      </div>
+      <button type="button" class="btn-logout" id="logoutBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Chiqish
+      </button>
+    </div>
+  </aside>
+
+  <!-- ═══ MAIN ═══════════════════════════════════════════════ -->
+  <main class="admin-main">
+    <header class="admin-header">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button type="button" class="sidebar-toggle" id="sidebarToggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="admin-header-title">KYBERS.OS <span>— Admin Panel</span></div>
+      </div>
+      <div class="admin-header-time" id="headerTime"></div>
+    </header>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <div class="admin-content">
+
+      <!-- ── DASHBOARD ─────────────────────────────────────── -->
+      <section class="admin-section active" id="section-dashboard">
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            </div>
+            <div class="stat-card-num" id="dashUsers">0</div>
+            <div class="stat-card-label">Foydalanuvchilar</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            </div>
+            <div class="stat-card-num" id="dashApps">0</div>
+            <div class="stat-card-label">Ilovalar</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+            </div>
+            <div class="stat-card-num" id="dashPending">0</div>
+            <div class="stat-card-label">Kutilayotgan to'lovlar</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div class="stat-card-num" id="dashApproved">0</div>
+            <div class="stat-card-label">Tasdiqlangan to'lovlar</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="stat-card-num" id="dashMessages">0</div>
+            <div class="stat-card-label">Yangi murojaatlar</div>
+          </div>
+        </div>
+
+        <div class="section-header">
+          <div class="section-title-sm">So'nggi <span>Foydalanuvchilar</span></div>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Ism</th>
+                <th>Email</th>
+                <th>Ro'yxatdan o'tgan</th>
+                <th>Rol</th>
+              </tr>
+            </thead>
+            <tbody id="dashUsersBody">
+              <tr><td colspan="5"><div class="empty-state"><p>Ma'lumot yo'q</p></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ── APPS ──────────────────────────────────────────── -->
+      <section class="admin-section" id="section-apps">
+        <div class="section-header">
+          <div class="section-title-sm">Ilovalar <span>Boshqaruvi</span></div>
+          <button type="button" class="btn-add" id="btnAddApp">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Ilova qo'shish
+          </button>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Ilova</th>
+                <th>Tavsif</th>
+                <th>Kategoriya</th>
+                <th>Narx</th>
+                <th>Havolasi</th>
+                <th>Amallar</th>
+              </tr>
+            </thead>
+            <tbody id="appsTableBody">
+              <tr><td colspan="7"><div class="empty-state">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="2" width="14" height="20" rx="2"/></svg>
+                <p>Hali ilovalar qo'shilmagan</p>
+              </div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ── USERS ─────────────────────────────────────────── -->
+      <section class="admin-section" id="section-users">
+        <div class="section-header">
+          <div class="section-title-sm">Foydalanuvchilar <span>Ro'yxati</span></div>
+          <div class="filter-bar">
+            <input type="search" class="form-input" id="userSearch" placeholder="Qidirish..." style="max-width:220px" />
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Ism</th>
+                <th>Email</th>
+                <th>Ro'yxatdan o'tgan</th>
+                <th>Rol</th>
+              </tr>
+            </thead>
+            <tbody id="usersTableBody">
+              <tr><td colspan="5"><div class="empty-state"><p>Foydalanuvchilar yo'q</p></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ── PAYMENTS ──────────────────────────────────────── -->
+      <section class="admin-section" id="section-payments">
+        <div class="section-header">
+          <div class="section-title-sm">To'lov <span>Tekshiruvi</span></div>
+          <div class="filter-bar">
+            <select class="form-input form-select" id="paymentFilter" title="To'lovlar filtri" style="max-width:180px">
+              <option value="all">Barchasi</option>
+              <option value="pending" selected>Kutilayotgan</option>
+              <option value="approved">Tasdiqlangan</option>
+              <option value="denied">Rad etilgan</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Foydalanuvchi</th>
+                <th>Ilova</th>
+                <th>Summa</th>
+                <th>Chek</th>
+                <th>Sana</th>
+                <th>Holat</th>
+                <th>Amallar</th>
+              </tr>
+            </thead>
+            <tbody id="paymentsTableBody">
+              <tr><td colspan="8"><div class="empty-state">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                <p>To'lovlar yo'q</p>
+              </div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ── MESSAGES ─────────────────────────────────────── -->
+      <section class="admin-section" id="section-messages">
+        <div class="section-header">
+          <div class="section-title-sm">Murojaatlar <span>Ro'yxati</span></div>
+          <div class="filter-bar">
+            <select class="form-input form-select" id="messageFilter" title="Murojaatlar filtri" style="max-width:180px">
+              <option value="all">Barchasi</option>
+              <option value="unread" selected>O'qilmagan</option>
+              <option value="read">O'qilgan</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Ism</th>
+                <th>Telefon</th>
+                <th>Email</th>
+                <th>Xabar</th>
+                <th>Sana</th>
+                <th>Holat</th>
+                <th>Amal</th>
+              </tr>
+            </thead>
+            <tbody id="messagesTableBody">
+              <tr><td colspan="8"><div class="empty-state">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <p>Murojaatlar yo'q</p>
+              </div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- ═══ APP MODAL ═══════════════════════════════════════════ -->
+<div class="admin-modal" id="appModal">
+  <div class="admin-modal-overlay" id="appModalOverlay"></div>
+  <div class="admin-modal-box">
+    <div class="admin-modal-header">
+      <div class="admin-modal-title" id="appModalTitle">Ilova qo'shish</div>
+      <button type="button" class="admin-modal-close" id="appModalClose">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <form id="appForm">
+      <input type="hidden" id="appId" />
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Ilova nomi *</label>
+          <input type="text" class="form-input" id="appName" placeholder="Masalan: Telegram" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Kategoriya</label>
+          <select class="form-input form-select" id="appCategory" title="Kategoriya tanlash">
+            <option value="security">Xavfsizlik</option>
+            <option value="network">Tarmoq</option>
+            <option value="utility">Yordamchi</option>
+            <option value="education">Ta'lim</option>
+            <option value="other">Boshqa</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Tavsif *</label>
+        <textarea class="form-textarea" id="appDesc" placeholder="Ilova haqida qisqacha..." required></textarea>
+      </div>
+
+      <!-- Icon upload -->
+      <div class="form-group">
+        <label class="form-label">Icon (rasm)</label>
+        <div class="upload-zone" id="iconZone">
+          <div class="upload-zone-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          </div>
+          <div class="upload-zone-text">Rasm yuklash</div>
+          <div class="upload-zone-hint">Drag &amp; drop · Bosing · <kbd>Ctrl+V</kbd></div>
+        </div>
+        <input type="file" id="iconFileInput" accept="image/*" style="display:none" />
+        <input type="url" class="form-input" id="appIconUrl" placeholder="yoki rasm URL manzilini kiriting" style="margin-top:8px" />
+      </div>
+
+      <!-- File upload -->
+      <div class="form-group">
+        <label class="form-label">Ilova fayli</label>
+        <div class="upload-zone" id="fileZone">
+          <div class="upload-zone-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          </div>
+          <div class="upload-zone-text">Fayl yuklash</div>
+          <div class="upload-zone-hint">Drag &amp; drop · Bosing (APK, EXE, ZIP...)</div>
+        </div>
+        <input type="file" id="appFileInput" style="display:none" />
+        <input type="url" class="form-input" id="appLink" placeholder="yoki yuklab olish havolasini kiriting" style="margin-top:8px" />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Narx (UZS)</label>
+          <input type="number" class="form-input" id="appPrice" placeholder="0 = Bepul" min="0" value="0" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">To'lov rekvizitlari</label>
+          <input type="text" class="form-input" id="appPaymentInfo" placeholder="Karta raqami yoki boshqa" />
+          <div class="form-hint">Foydalanuvchi to'lov qilishi uchun</div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn-cancel" id="appModalCancel">Bekor qilish</button>
+        <button type="submit" class="btn-save">Saqlash</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ═══ RECEIPT MODAL ════════════════════════════════════════ -->
+<div class="admin-modal" id="receiptModal">
+  <div class="admin-modal-overlay" id="receiptModalOverlay"></div>
+  <div class="admin-modal-box" style="max-width:480px">
+    <div class="admin-modal-header">
+      <div class="admin-modal-title">To'lov Cheki</div>
+      <button type="button" class="admin-modal-close" id="receiptModalClose">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div id="receiptDetails"></div>
+  </div>
+</div>
+
+<script src="../js/admin.js"></script>
+</body>
+</html>

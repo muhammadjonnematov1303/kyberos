@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "Bash(node -e \"require\\('dotenv'\\).config\\(\\); const connectDB = require\\('./config/db'\\); connectDB\\(\\).then\\(\\(\\) => { console.log\\('OK'\\); process.exit\\(0\\); }\\).catch\\(e => { console.error\\(e.message\\); process.exit\\(1\\); }\\);\")",
+      "Bash(node -e \"const express=require\\('express'\\); const jwt=require\\('jsonwebtoken'\\); const bcrypt=require\\('bcryptjs'\\); const mongoose=require\\('mongoose'\\); console.log\\('Barcha modullar yuklanmoqda: OK'\\);\")",
+      "Bash(node -e ' *)",
+      "Bash(node server.js)",
+      "Bash(curl -s http://localhost:5000/api/health)",
+      "Bash(curl -s http://localhost:5000/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5000/pages/login.html)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5000/pages/apps.html)",
+      "Bash(taskkill /F /PID 11500)",
+      "Bash(taskkill /F /IM node.exe)",
+      "Bash(curl -s -X POST http://localhost:5000/api/auth/register -H 'Content-Type: application/json' -d '{\"name\":\"Test User\",\"email\":\"test@kybers.uz\",\"password\":\"test123\"}')",
+      "Bash(python -m json.tool)",
+      "Bash(curl -s -X POST http://localhost:5000/api/auth/register -H \"Content-Type: application/json\" -d '{\"name\":\"Test User\",\"email\":\"test@kybers.uz\",\"password\":\"test123\"}')",
+      "Bash(nslookup _mongodb._tcp.cluster0.pi0sqmw.mongodb.net)",
+      "Bash(node mongodbExample.js)",
+      "Bash(mv server/* backend/)",
+      "Bash(mv server/.env backend/)",
+      "Bash(rm -rf server)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\shuku\\OneDrive\\Desktop\\kybers-os\\server"
+    ]
+  }
+}

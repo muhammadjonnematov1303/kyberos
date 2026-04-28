@@ -1,0 +1,65 @@
+/* ============================================================
+   KYBERS.OS — Font Configuration
+   ============================================================ */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@600;700;800;900&family=Roboto:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* Font Variables */
+:root {
+  /* Primary Fonts */
+  --font-body: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-button: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-admin: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* Global Font Application */
+body {
+  font-family: var(--font-body);
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6,
+.hero-title,
+.section-title,
+.service-title,
+.app-name,
+.modal-title {
+  font-family: var(--font-heading);
+}
+
+/* Buttons */
+.btn,
+.app-btn,
+button[type="submit"],
+button[type="button"] {
+  font-family: var(--font-button);
+}
+
+/* Labels & Small Text */
+.section-label,
+.hero-badge,
+.stat-label,
+.form-label,
+.footer-col-title {
+  font-family: var(--font-mono);
+}
+
+/* Numbers & Stats */
+.stat-value,
+.hero-badge-dot,
+.app-badge,
+.badge {
+  font-family: var(--font-mono);
+}
+
+/* Navigation */
+.nav-logo-text {
+  font-family: var(--font-heading);
+}
+
+.nav-menu a {
+  font-family: var(--font-body);
+}

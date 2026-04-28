@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="KYBERS.OS — Barcha Ilovalar. Premium kiberxavfsizlik platformasi." />
+  <title>Ilovalar — KYBERS.OS</title>
+  <link rel="stylesheet" href="../css/fonts.css" />
+  <link rel="stylesheet" href="../css/style.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><path d='M16 4 L28 9 L28 18 Q28 27 16 31 Q4 27 4 18 L4 9 Z' fill='none' stroke='%2300ff9f' stroke-width='1.5'/></svg>" />
+  <style>
+    /* ── Background ─────────────────────────────────────── */
+    html { height: 100%; }
+    body { 
+      background-image:url('../images/background.webp'); 
+      background-size:cover; 
+      background-position:center; 
+      background-repeat:no-repeat; 
+      background-attachment:fixed;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+    @media(max-width:768px){ body{ background-image:url('../images/background-9x16.webp'); } }
+    body::after { content:''; position:fixed; inset:0; background:rgba(0,0,0,0.65); z-index:0; pointer-events:none; }
+    .navbar { background:rgba(5,0,0,0.92); }
+    footer { position:relative; z-index:1; margin-top: auto; }
+
+    /* ── Page layout ─────────────────────────────────────── */
+    .apps-page { 
+      padding:130px 0 100px; 
+      min-height: calc(100vh - 200px);
+      height: auto;
+      position:relative; 
+      z-index:1;
+      flex: 1;
+    }
+    .page-header { text-align:center; margin-bottom:56px; }
+    .page-header .section-label { justify-content:center; }
+    .page-header .section-label::before { display:none; }
+    .page-header .section-label::after { content:''; display:inline-block; width:28px; height:1px; background:var(--neon); }
+
+    /* ── Grid ────────────────────────────────────────────── */
+    .apps-grid {
+      display:grid;
+      grid-template-columns: repeat(3,1fr);
+      gap:24px;
+    }
+    @media(max-width:1024px){ .apps-grid{ grid-template-columns:repeat(2,1fr); } }
+    @media(max-width:600px){ .apps-grid{ grid-template-columns:1fr; gap:16px; } }
+
+    /* ── Skeleton ────────────────────────────────────────── */
+    .app-skeleton {
+      background:rgba(18,0,0,0.7); border:1px solid rgba(255,0,0,0.1);
+      border-radius:20px; padding:24px; animation:skeleton-pulse 1.6s ease-in-out infinite;
+    }
+    .sk-logo { width:72px; height:72px; border-radius:14px; background:rgba(255,0,0,0.08); margin-bottom:18px; }
+    .sk-line { height:12px; border-radius:6px; background:rgba(255,0,0,0.07); margin-bottom:10px; }
+    .sk-line.w80 { width:80%; }
+    .sk-line.w60 { width:60%; }
+    .sk-btn { height:44px; border-radius:12px; background:rgba(255,0,0,0.08); margin-top:20px; }
+    @keyframes skeleton-pulse { 0%,100%{opacity:1;} 50%{opacity:0.5;} }
+
+    /* ── App Card ────────────────────────────────────────── */
+    .app-card {
+      background:rgba(14,2,2,0.82);
+      border:1px solid rgba(255,0,0,0.14);
+      border-radius:20px;
+      padding:22px 20px 20px;
+      display:flex; flex-direction:column;
+      position:relative; overflow:hidden;
+      -webkit-backdrop-filter:blur(18px);
+      backdrop-filter:blur(18px);
+      transition:transform 0.35s cubic-bezier(0.4,0,0.2,1),
+                 border-color 0.35s ease,
+                 box-shadow 0.35s ease;
+      will-change:transform;
+    }
+    .app-card::after {
+      content:''; position:absolute; top:0; left:0; right:0; height:1px;
+      background:linear-gradient(90deg,transparent,rgba(255,0,0,0.7),transparent);
+      opacity:0; transition:opacity 0.35s ease;
+    }
+    .app-card:hover {
+      transform:translateY(-6px) scale(1.015);
+      border-color:rgba(255,0,0,0.42);
+      box-shadow:0 20px 60px rgba(0,0,0,0.55), 0 0 40px rgba(255,0,0,0.14);
+    }
+    .app-card:hover::after { opacity:1; }
+    .app-card.free-card:hover { border-color:rgba(0,200,100,0.4); box-shadow:0 20px 60px rgba(0,0,0,0.55),0 0 40px rgba(0,200,100,0.1); }
+    .app-card.free-card::after { background:linear-gradient(90deg,transparent,rgba(0,200,100,0.6),transparent); }
+
+    /* ── Card top row ────────────────────────────────────── */
+    .app-card-top { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:16px; gap:10px; }
+
+    /* ── Logo ────────────────────────────────────────────── */
+    .app-logo {
+      width:72px; height:72px; flex-shrink:0;
+      border-radius:14px; overflow:hidden;
+      background:rgba(255,0,0,0.07);
+      border:1px solid rgba(255,0,0,0.2);
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 4px 20px rgba(0,0,0,0.4);
+    }
+    .app-logo img { width:100%; height:100%; object-fit:cover; display:block; }
+    .app-logo-letter {
+      font-family:'Orbitron',monospace; font-size:1.6rem; font-weight:800;
+      color:rgba(255,0,0,0.7); text-transform:uppercase;
+    }
+
+    /* ── Badge ───────────────────────────────────────────── */
+    .app-badge {
+      display:inline-flex; align-items:center; gap:5px;
+      font-family:'Orbitron',monospace; font-size:0.6rem; font-weight:700;
+      letter-spacing:0.1em; text-transform:uppercase;
+      padding:5px 10px; border-radius:8px; white-space:nowrap; flex-shrink:0;
+    }
+    .app-badge .bdot { width:5px; height:5px; border-radius:50%; background:currentColor; }
+    .app-badge.free    { color:#00cc64; background:rgba(0,204,100,0.1); border:1px solid rgba(0,204,100,0.3); box-shadow:0 0 12px rgba(0,204,100,0.12); }
+    .app-badge.paid    { color:#ff4444; background:rgba(255,0,0,0.1); border:1px solid rgba(255,0,0,0.3); box-shadow:0 0 12px rgba(255,0,0,0.12); }
+    .app-badge.approved { color:#00cc64; background:rgba(0,204,100,0.1); border:1px solid rgba(0,204,100,0.3); }
+    .app-badge.pending  { color:#ffb347; background:rgba(255,179,71,0.1); border:1px solid rgba(255,179,71,0.3); }
+
+    /* ── Name + category ─────────────────────────────────── */
+    .app-name {
+      font-family:'Orbitron',monospace; font-size:0.98rem; font-weight:700;
+      color:#fff; margin-bottom:6px; letter-spacing:0.03em;
+      line-height:1.3;
+    }
+    .app-category {
+      font-size:0.72rem; color:#664a4a;
+      font-family:'Orbitron',monospace; letter-spacing:0.08em;
+      text-transform:uppercase; margin-bottom:12px;
+    }
+
+    /* ── Description ─────────────────────────────────────── */
+    .app-desc-wrap { flex:1; margin-bottom:16px; }
+    .app-desc {
+      font-size:0.855rem; color:#b8a0a0; line-height:1.65;
+      display:-webkit-box; 
+      -webkit-line-clamp:3; 
+      line-clamp:3;
+      -webkit-box-orient:vertical;
+      overflow:hidden; transition:all 0.3s ease;
+    }
+    .app-desc.expanded { -webkit-line-clamp:unset; line-clamp:unset; display:block; }
+    .app-read-more {
+      display:inline-block; margin-top:6px;
+      font-size:0.75rem; color:rgba(255,0,0,0.6);
+      font-family:'Orbitron',monospace; letter-spacing:0.06em;
+      background:none; border:none; cursor:pointer; padding:0;
+      transition:color 0.2s;
+    }
+    .app-read-more:hover { color:rgba(255,0,0,1); }
+
+    /* ── Divider ─────────────────────────────────────────── */
+    .app-divider { height:1px; background:rgba(255,0,0,0.1); margin-bottom:16px; }
+
+    /* ── Action button ───────────────────────────────────── */
+    .app-btn {
+      display:flex; align-items:center; justify-content:center; gap:9px;
+      width:100%; padding:13px 20px;
+      border:none; border-radius:13px;
+      font-family:'Orbitron',monospace; font-size:0.72rem; font-weight:800;
+      letter-spacing:0.1em; text-transform:uppercase; text-decoration:none;
+      cursor:pointer; transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+    }
+    .app-btn svg { width:16px; height:16px; flex-shrink:0; }
+
+    .app-btn.dl-btn {
+      background:linear-gradient(135deg,#00cc64,#009948);
+      color:#fff; box-shadow:0 0 24px rgba(0,200,100,0.32);
+    }
+    .app-btn.dl-btn:hover { box-shadow:0 0 40px rgba(0,200,100,0.55); transform:translateY(-2px); }
+
+    .app-btn.pay-btn {
+      background:linear-gradient(135deg,#ff2020,#cc0000);
+      color:#fff; box-shadow:0 0 24px rgba(255,0,0,0.3);
+    }
+    .app-btn.pay-btn:hover { box-shadow:0 0 40px rgba(255,0,0,0.5); transform:translateY(-2px); }
+
+    .app-btn.pending-btn {
+      background:rgba(255,179,71,0.1); border:1px solid rgba(255,179,71,0.28);
+      color:#ffb347; box-shadow:none; cursor:default; pointer-events:none;
+    }
+    .app-btn:active { transform:translateY(0) !important; }
+
+    .app-btn.tg-btn {
+      background:linear-gradient(135deg,#229ED9,#0088CC);
+      color:#fff; box-shadow:0 0 20px rgba(34,158,217,0.25);
+      margin-top:10px;
+    }
+    .app-btn.tg-btn:hover { box-shadow:0 0 36px rgba(34,158,217,0.5); transform:translateY(-2px); }
+
+    /* ── Empty ───────────────────────────────────────────── */
+    .apps-empty { grid-column:1/-1; text-align:center; padding:80px 20px; }
+    .apps-empty p { color:#664a4a; font-size:1rem; font-family:'Orbitron',monospace; letter-spacing:0.06em; }
+
+    /* ── User menu ───────────────────────────────────────── */
+    .user-menu { position:relative; }
+    .nav-right { display:flex; align-items:center; gap:10px; }
+    .user-avatar-btn { display:flex; align-items:center; gap:8px; background:rgba(255,0,0,0.08); border:1px solid rgba(255,0,0,0.25); border-radius:12px; padding:7px; cursor:pointer; transition:all 0.3s ease; color:#fff; font-family:'Space Grotesk',sans-serif; }
+    .user-avatar-btn:hover { border-color:rgba(255,0,0,0.5); background:rgba(255,0,0,0.14); }
+    .user-avatar { width:36px; height:36px; border-radius:10px; background:linear-gradient(135deg,#ff0000,#cc0000); display:flex; align-items:center; justify-content:center; font-family:'Orbitron',monospace; font-size:0.95rem; font-weight:700; color:#fff; flex-shrink:0; }
+    .user-name { font-size:0.875rem; font-weight:500; max-width:100px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; display:none; }
+    .user-dropdown { position:absolute; top:calc(100% + 10px); right:0; min-width:230px; background:rgba(12,0,0,0.97); border:1px solid rgba(255,0,0,0.3); border-radius:14px; padding:8px; backdrop-filter:blur(20px); box-shadow:0 20px 60px rgba(0,0,0,0.6),0 0 30px rgba(255,0,0,0.1); opacity:0; visibility:hidden; transform:translateY(-8px); transition:all 0.3s ease; z-index:200; }
+    .user-dropdown.show { opacity:1; visibility:visible; transform:translateY(0); }
+    .user-info { padding:12px 12px 10px; }
+    .user-info-name { font-family:'Orbitron',monospace; font-size:0.85rem; font-weight:700; color:#fff; margin-bottom:3px; }
+    .user-info-email { font-size:0.78rem; color:#664a4a; margin-bottom:6px; }
+    .user-info-status { display:flex; align-items:center; gap:6px; font-size:0.75rem; color:#ff4444; font-family:'Orbitron',monospace; letter-spacing:0.06em; }
+    .status-dot { width:7px; height:7px; background:#ff0000; border-radius:50%; box-shadow:0 0 8px #ff0000; animation:blink 2s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+    .dropdown-divider { height:1px; background:rgba(255,0,0,0.12); margin:4px 0; }
+    .dropdown-item { display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:8px; font-size:0.875rem; color:#c8b0b0; text-decoration:none; transition:all 0.25s ease; cursor:pointer; width:100%; text-align:left; background:none; border:none; font-family:'Space Grotesk',sans-serif; }
+    .dropdown-item:hover { background:rgba(255,0,0,0.1); color:#ff4444; }
+    .dropdown-item svg { width:16px; height:16px; flex-shrink:0; }
+    .dropdown-item-admin { color:#ff0000 !important; }
+    .dropdown-item-logout { color:#ff6b6b; }
+    .dropdown-nav-all { display:block; }
+    .dropdown-nav-mobile { display:none; }
+    @media(max-width:768px){
+      .dropdown-nav-all{ display:none; }
+      .dropdown-nav-mobile{ display:block; }
+      .nav-menu{ display:none; }
+      .nav-cta{ display:none; }
+      .user-menu{ display:flex !important; }
+      .chevron-icon{ display:none; }
+      .user-avatar-btn{ padding:6px; border-radius:10px; }
+      .user-avatar{ width:38px; height:38px; border-radius:10px; font-size:1rem; }
+      .user-name{ max-width:120px; font-size:0.82rem; display:none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════════════════ -->
+<nav class="navbar scrolled" id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+
+      <a href="../index.html" class="nav-logo">
+        <img src="../images/logo.webp" alt="KYBERS.OS Logo" onerror="this.style.display='none'" />
+        <span class="nav-logo-text">KYBERS.OS</span>
+      </a>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="../index.html">Bosh sahifa</a></li>
+        <li><a href="apps.html" class="active">Ilovalar</a></li>
+        <li><a href="../index.html#about">Biz haqimizda</a></li>
+        <li><a href="../index.html#contact">Aloqa</a></li>
+      </ul>
+
+      <!-- Login button or user menu injected here by JS -->
+      <div class="nav-right">
+        <!-- Kirish (faqat login bo'lmagan holda) -->
+        <a href="login.html" class="btn btn-primary nav-cta" id="loginBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          Kirish
+        </a>
+
+        <!-- Profil (login bo'lganda) -->
+        <div class="user-menu" id="userMenu" style="display:none">
+          <button type="button" class="user-avatar-btn" id="userAvatarBtn">
+            <span class="user-avatar" id="userAvatarLetter">A</span>
+            <svg class="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+
+          <div class="user-dropdown" id="userDropdown">
+            <div class="user-info">
+              <div class="user-info-name" id="dropdownName"></div>
+              <div class="user-info-email" id="dropdownEmail"></div>
+              <div id="dropdownAdminBadge" style="display:none; margin-top:8px;">
+                <span class="user-info-status">
+                  <span class="status-dot"></span>
+                  ADMIN
+                </span>
+              </div>
+              <div id="dropdownUserBadge" style="display:none; margin-top:8px;">
+                <span class="user-info-status" style="color:#aaaacc;">
+                  <span class="status-dot" style="background:#aaaacc;box-shadow:0 0 6px #aaaacc;"></span>
+                  FOYDALANUVCHI
+                </span>
+              </div>
+            </div>
+            <div class="dropdown-divider"></div>
+
+            <!-- Navigatsiya bo'limlari (har doim ko'rinadi) -->
+            <div class="dropdown-nav-all">
+              <a href="../index.html" class="dropdown-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                Bosh sahifa
+              </a>
+              <a href="apps.html" class="dropdown-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                Ilovalar
+              </a>
+              <a href="../index.html#about" class="dropdown-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Biz haqimizda
+              </a>
+              <a href="../index.html#contact" class="dropdown-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Aloqa
+              </a>
+              <div class="dropdown-divider"></div>
+            </div>
+
+            <!-- Mobil: navigatsiya bo'limlari -->
+            <div class="dropdown-nav-mobile">
+              <a href="../index.html" class="dropdown-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                Bosh sahifa
+              </a>
+              <a href="apps.html" class="dropdown-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                Ilovalar
+              </a>
+              <a href="../index.html#about" class="dropdown-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Biz haqimizda
+              </a>
+              <a href="../index.html#contact" class="dropdown-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Aloqa
+              </a>
+              <div class="dropdown-divider"></div>
+            </div>
+
+            <!-- Admin panel (faqat adminga) -->
+            <a href="admin.html" class="dropdown-item dropdown-item-admin" id="adminPanelLink" style="display:none;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Admin Panel
+            </a>
+            <div class="dropdown-divider" id="adminDivider" style="display:none;"></div>
+
+            <!-- Chiqish -->
+            <button type="button" class="dropdown-item dropdown-item-logout" id="logoutBtn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              Chiqish
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════
+     APPS PAGE
+════════════════════════════════════════════════════ -->
+<section class="apps-page">
+  <div class="container">
+    <div class="page-header">
+      <p class="section-label">Barcha ilovalar</p>
+      <h1 class="section-title">Foydali <span>Ilovalar</span></h1>
+      <p class="section-desc" style="margin: 0 auto">Eng mashhur va foydali ilovalarni bir joydan yuklab oling.</p>
+    </div>
+
+    <div class="apps-grid" id="appsGrid"></div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <a href="../index.html" class="footer-logo">
+          <img src="../images/logo.webp" alt="Logo" onerror="this.style.display='none'" />
+          <span class="footer-logo-text">KYBERS.OS</span>
+        </a>
+        <p class="footer-desc">
+          Zamonaviy kiberxavfsizlik yechimlari bilan biznesingizni raqamli tahdidlardan himoya qilamiz.
+        </p>
+        <div style="margin-top: 16px;">
+          <a href="https://t.me/ulken_admin" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(255,0,0,0.1);border:1px solid rgba(255,0,0,0.3);border-radius:10px;color:#ff0000;text-decoration:none;font-size:0.85rem;font-family:'Orbitron',monospace;letter-spacing:0.05em;transition:all 0.3s ease;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+            </svg>
+            @ulken_admin
+          </a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Havolalar</div>
+        <ul class="footer-links">
+          <li><a href="../index.html">Bosh sahifa</a></li>
+          <li><a href="apps.html">Ilovalar</a></li>
+          <li><a href="../index.html#about">Biz haqimizda</a></li>
+          <li><a href="../index.html#contact">Aloqa</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Aloqa</div>
+        <div class="footer-contact-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          perdebaevadilbek586@gmail.com
+        </div>
+        <div class="footer-contact-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +998 99 661 10 08
+        </div>
+        <div class="footer-contact-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Nukus, Uzbekistan
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">&copy; 2026 KYBERS.OS — Barcha huquqlar himoyalangan</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ════════════════════════════════════════════════════
+     PAYMENT MODAL
+════════════════════════════════════════════════════ -->
+<div id="payModal" style="display:none; position:fixed; inset:0; z-index:5000; background:rgba(0,0,0,0.75); backdrop-filter:blur(6px); align-items:center; justify-content:center;">
+  <div style="background:#0d0202; border:1px solid rgba(255,0,0,0.3); border-radius:24px; padding:36px 32px; max-width:420px; width:calc(100% - 32px); position:relative; box-shadow:0 24px 80px rgba(0,0,0,0.7),0 0 40px rgba(255,0,0,0.1);">
+
+    <!-- Close -->
+    <button type="button" onclick="closePayModal()" style="position:absolute; top:16px; right:16px; background:none; border:none; color:#664a4a; font-size:1.4rem; cursor:pointer; line-height:1;">&#x2715;</button>
+
+    <!-- STEP 1: Card info -->
+    <div id="payStep1">
+      <p style="font-family:'Orbitron',monospace; font-size:0.7rem; color:#ff4444; letter-spacing:0.1em; margin-bottom:14px;">TO'LOV / STEP 1</p>
+      <h2 style="font-family:'Orbitron',monospace; font-size:1.1rem; font-weight:700; color:#fff; margin-bottom:24px;" id="payAppTitle">Ilova nomi</h2>
+
+      <div style="background:rgba(255,0,0,0.06); border:1px solid rgba(255,0,0,0.2); border-radius:16px; padding:20px; margin-bottom:20px;">
+        <p style="font-size:0.75rem; color:#664a4a; font-family:'JetBrains Mono',monospace; letter-spacing:0.06em; margin-bottom:8px;">KARTA RAQAMI</p>
+        <p style="font-family:'JetBrains Mono',monospace; font-size:1.05rem; color:#fff; letter-spacing:0.12em; margin-bottom:14px;">9860 1201 8681 7033</p>
+        <p style="font-size:0.75rem; color:#664a4a; font-family:'JetBrains Mono',monospace; letter-spacing:0.06em; margin-bottom:6px;">EGASI</p>
+        <p style="font-family:'Poppins',sans-serif; font-size:0.95rem; color:#ff4444; font-weight:600; margin-bottom:14px;">Adilbek.P</p>
+        <p style="font-size:0.75rem; color:#664a4a; font-family:'JetBrains Mono',monospace; letter-spacing:0.06em; margin-bottom:6px;">SUMMA</p>
+        <p style="font-family:'JetBrains Mono',monospace; font-size:1.1rem; color:#ffb347; font-weight:700;" id="payAmount">0 UZS</p>
+      </div>
+
+      <button type="button" onclick="goPayStep2()" style="width:100%; padding:14px; background:linear-gradient(135deg,#ff0000,#cc0000); border:none; border-radius:14px; color:#fff; font-family:'Orbitron',monospace; font-size:0.8rem; font-weight:800; letter-spacing:0.1em; cursor:pointer; box-shadow:0 0 24px rgba(255,0,0,0.35);">
+        TASHLANDI — CHEKNI YUKLASH
+      </button>
+    </div>
+
+    <!-- STEP 2: Receipt upload -->
+    <div id="payStep2" style="display:none;">
+      <p style="font-family:'Orbitron',monospace; font-size:0.7rem; color:#ff4444; letter-spacing:0.1em; margin-bottom:14px;">CHEK YUKLASH / STEP 2</p>
+      <p style="font-size:0.85rem; color:#c8b0b0; margin-bottom:20px;">To'lov chekining rasmini yuboring. Admin tekshirib, ilovani faollashtiradi.</p>
+
+      <!-- Receipt preview -->
+      <div id="receiptPreview" style="display:none; margin-bottom:16px; text-align:center;">
+        <img id="receiptImg" src="" alt="Chek" style="max-width:100%; max-height:220px; border-radius:12px; border:1px solid rgba(255,0,0,0.25);" />
+      </div>
+
+      <!-- Upload buttons -->
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:16px;">
+        <button type="button" onclick="openCamera()" style="padding:12px 8px; background:rgba(255,0,0,0.08); border:1px solid rgba(255,0,0,0.25); border-radius:12px; color:#ff4444; font-family:'Orbitron',monospace; font-size:0.65rem; font-weight:700; letter-spacing:0.06em; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          KAMERA
+        </button>
+        <button type="button" onclick="openGallery()" style="padding:12px 8px; background:rgba(255,0,0,0.08); border:1px solid rgba(255,0,0,0.25); border-radius:12px; color:#ff4444; font-family:'Orbitron',monospace; font-size:0.65rem; font-weight:700; letter-spacing:0.06em; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          GALEREYA
+        </button>
+        <button type="button" onclick="pasteClipboard()" style="padding:12px 8px; background:rgba(255,0,0,0.08); border:1px solid rgba(255,0,0,0.25); border-radius:12px; color:#ff4444; font-family:'Orbitron',monospace; font-size:0.65rem; font-weight:700; letter-spacing:0.06em; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:8px;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+          BUFER
+        </button>
+      </div>
+
+      <!-- Hidden file inputs -->
+      <input type="file" id="cameraInput"  accept="image/*" capture="environment" style="display:none;" onchange="handleReceiptFile(this)" />
+      <input type="file" id="galleryInput" accept="image/*" style="display:none;" onchange="handleReceiptFile(this)" />
+
+      <button type="button" id="submitReceiptBtn" onclick="submitReceipt()" disabled style="width:100%; padding:14px; background:rgba(255,0,0,0.15); border:1px solid rgba(255,0,0,0.3); border-radius:14px; color:#664a4a; font-family:'Orbitron',monospace; font-size:0.8rem; font-weight:800; letter-spacing:0.1em; cursor:not-allowed; transition:all 0.3s;">
+        CHEKNI YUBORISH
+      </button>
+    </div>
+
+    <!-- STEP 3: Success -->
+    <div id="payStep3" style="display:none; text-align:center; padding:10px 0;">
+      <div style="width:72px; height:72px; background:rgba(0,200,100,0.1); border:2px solid rgba(0,200,100,0.4); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 20px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#00cc64" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <h3 style="font-family:'Orbitron',monospace; font-size:1rem; font-weight:700; color:#00cc64; margin-bottom:12px;">CHEK YUBORILDI!</h3>
+      <p style="font-size:0.875rem; color:#c8b0b0; line-height:1.65; margin-bottom:24px;">Admin chekingizni tekshiradi va tez orada ilovani faollashtiradi.</p>
+      <button type="button" onclick="closePayModal()" style="padding:12px 28px; background:linear-gradient(135deg,#ff0000,#cc0000); border:none; border-radius:12px; color:#fff; font-family:'Orbitron',monospace; font-size:0.75rem; font-weight:800; letter-spacing:0.1em; cursor:pointer;">
+        YOPISH
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<script src="../js/apps.js"></script>
+</body>
+</html>

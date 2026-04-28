@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="uz">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Kybers.OS — Zamonaviy Kiberxavfsizlik Platformasi. Tezkor, Xavfsiz va Aqlli Yechimlar."
+    />
+    <title>Kybers.OS</title>
+    <link rel="stylesheet" href="./css/fonts.css" />
+    <link rel="stylesheet" href="./css/style.min.css" />
+    <link rel="icon" type="image/svg+xml" href="./images/favicon.webp" />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  </head>
+  <body class="has-bg">
+    <!-- ════════════════════════════════════════════════════
+     NAVBAR
+════════════════════════════════════════════════════ -->
+    <nav class="navbar" id="navbar">
+      <div class="container">
+        <div class="nav-inner">
+          <a href="#home" class="nav-logo">
+            <img src="./images/logo.webp" alt="Kybers.OS Logo" onerror="this.style.display='none'" />
+            <span class="nav-logo-text">Kybers<span>.OS</span></span>
+          </a>
+
+          <ul class="nav-menu" id="navMenu">
+            <li><a href="#home">Bosh sahifa</a></li>
+            <li><a href="./pages/apps.html">Ilovalar</a></li>
+            <li><a href="#about">Biz haqimizda</a></li>
+            <li><a href="#contact">Aloqa</a></li>
+          </ul>
+
+          <div class="nav-right">
+            <!-- Kirish (faqat login bo'lmagan holda) -->
+            <a href="./pages/login.html" class="btn btn-primary nav-cta" id="loginBtn">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                <polyline points="10 17 15 12 10 7"/>
+                <line x1="15" y1="12" x2="3" y2="12"/>
+              </svg>
+              Kirish
+            </a>
+
+            <!-- Profil (login bo'lganda) -->
+            <div class="user-menu" id="userMenu" style="display:none">
+              <button type="button" class="user-avatar-btn" id="userAvatarBtn">
+                <span class="user-avatar" id="userAvatarLetter">A</span>
+                <svg class="chevron-icon" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </button>
+
+              <div class="user-dropdown" id="userDropdown">
+                <!-- Foydalanuvchi ma'lumoti -->
+                <div class="user-info">
+                  <div class="user-info-name" id="dropdownName"></div>
+                  <div class="user-info-email" id="dropdownEmail"></div>
+                  <div id="dropdownAdminBadge" style="display:none; margin-top:8px;">
+                    <span class="user-info-status">
+                      <span class="status-dot"></span>
+                      ADMIN
+                    </span>
+                  </div>
+                  <div id="dropdownUserBadge" style="display:none; margin-top:8px;">
+                    <span class="user-info-status" style="color:#aaaacc;">
+                      <span class="status-dot" style="background:#aaaacc;box-shadow:0 0 6px #aaaacc;"></span>
+                      FOYDALANUVCHI
+                    </span>
+                  </div>
+                </div>
+                <div class="dropdown-divider"></div>
+
+                <!-- Mobil: navigatsiya bo'limlari -->
+                <div class="dropdown-nav-mobile">
+                  <a href="#home" class="dropdown-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    Bosh sahifa
+                  </a>
+                  <a href="./pages/apps.html" class="dropdown-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                    Ilovalar
+                  </a>
+                  <a href="#about" class="dropdown-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    Biz haqimizda
+                  </a>
+                  <a href="#contact" class="dropdown-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                    Aloqa
+                  </a>
+                  <div class="dropdown-divider"></div>
+                </div>
+
+                <!-- Admin panel (faqat adminga) -->
+                <a href="./pages/admin.html" class="dropdown-item dropdown-item-admin" id="adminPanelLink" style="display:none;">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  Admin Panel
+                </a>
+                <div class="dropdown-divider" id="adminDivider" style="display:none;"></div>
+
+                <!-- Chiqish -->
+                <button type="button" class="dropdown-item dropdown-item-logout" id="logoutBtn">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                  Chiqish
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ════════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════════ -->
+    <section id="home">
+      <div class="hero-particles" id="heroParticles"></div>
+
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-cta">
+            <a
+              href="https://t.me/kybers_os"
+              target="_blank"
+              class="btn btn-telegram btn-lg"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"
+                />
+              </svg>
+              TELEGRAM
+            </a>
+            <a
+              href="https://www.instagram.com/kybers.os?igsh=MXdxZjl6bnlxMzlkag=="
+              target="_blank"
+              class="btn btn-instagram btn-lg"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
+              INSTAGRAM
+            </a>
+            <a
+              href="https://youtube.com/@kyber_os?si=bypvA4C5dhws044t"
+              target="_blank"
+              class="btn btn-youtube btn-lg"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+              >
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                />
+              </svg>
+              YOUTUBE
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-scroll">
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════
+     LOGIN MODAL
+════════════════════════════════════════════════════ -->
+    <div class="modal" id="loginModal">
+      <div class="modal-overlay" id="modalOverlay"></div>
+      <div class="modal-content">
+        <button class="modal-close" id="modalClose">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+
+        <div class="modal-tabs">
+          <button class="modal-tab active" data-tab="login">Kirish</button>
+          <button class="modal-tab" data-tab="register">
+            Ro'yxatdan o'tish
+          </button>
+        </div>
+
+        <!-- Login Form -->
+        <div class="modal-form active" id="loginForm">
+          <h2 class="modal-title">Tizimga Kirish</h2>
+          <form id="modalLoginForm">
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input
+                class="form-input"
+                type="email"
+                id="modalEmail"
+                placeholder="email@example.com"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Parol</label>
+              <input
+                class="form-input"
+                type="password"
+                id="modalPassword"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+            <div
+              id="modalLoginError"
+              style="
+                color: #ff6b6b;
+                font-size: 0.8rem;
+                margin-bottom: 12px;
+                display: none;
+              "
+            ></div>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              style="width: 100%; justify-content: center"
+            >
+              Kirish
+            </button>
+          </form>
+        </div>
+
+        <!-- Register Form -->
+        <div class="modal-form" id="registerForm">
+          <h2 class="modal-title">Ro'yxatdan O'tish</h2>
+          <form id="modalRegisterForm">
+            <div class="form-group">
+              <label class="form-label">Ism</label>
+              <input
+                class="form-input"
+                type="text"
+                id="modalName"
+                placeholder="Ismingiz"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input
+                class="form-input"
+                type="email"
+                id="modalRegEmail"
+                placeholder="email@example.com"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Parol</label>
+              <input
+                class="form-input"
+                type="password"
+                id="modalRegPassword"
+                placeholder="••••••••"
+                required
+              />
+            </div>
+            <div
+              id="modalRegError"
+              style="
+                color: #ff6b6b;
+                font-size: 0.8rem;
+                margin-bottom: 12px;
+                display: none;
+              "
+            ></div>
+            <button
+              type="submit"
+              class="btn btn-primary"
+              style="width: 100%; justify-content: center"
+            >
+              Ro'yxatdan o'tish
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════
+     STATS
+════════════════════════════════════════════════════ -->
+    <section id="stats">
+      <div class="container">
+        <div class="stats-grid" id="statsGrid">
+          <div class="stat-item reveal">
+            <div class="stat-value" data-target="500" data-suffix="+">0+</div>
+            <div class="stat-label">Mijozlar</div>
+          </div>
+          <div class="stat-item reveal delay-1">
+            <div class="stat-value" data-target="99" data-suffix="%">0%</div>
+            <div class="stat-label">Uptime</div>
+          </div>
+          <div class="stat-item reveal delay-2">
+            <div class="stat-value" data-target="24" data-suffix="/7">0/7</div>
+            <div class="stat-label">Qo'llab-quvvatlash</div>
+          </div>
+          <div class="stat-item reveal delay-3">
+            <div class="stat-value" data-target="150" data-suffix="+">0+</div>
+            <div class="stat-label">Loyihalar</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════
+     APPS
+════════════════════════════════════════════════════ -->
+    <section id="services" class="section">
+      <div class="container">
+        <div class="services-header reveal">
+          <p class="section-label">Mashxur ilovalar</p>
+          <h2 class="section-title">Eng Ko'p <span>Yuklanadigan</span></h2>
+          <p class="section-desc">
+            Eng mashhur va foydali ilovalarni bir joydan yuklab oling.
+          </p>
+        </div>
+        <div class="services-grid" id="servicesGrid"></div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════
+     ABOUT
+════════════════════════════════════════════════════ -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-image-wrap reveal-left">
+            <div class="about-image-frame">
+              <img
+                src="./images/background-9x16.webp"
+                alt="KYBERS.OS haqida"
+                onerror="
+                  this.style.background =
+                    'linear-gradient(135deg,#0e1810 0%,#0a2018 100%)';
+                  this.style.minHeight = '420px';
+                "
+              />
+              <div class="corner corner-tl"></div>
+              <div class="corner corner-tr"></div>
+              <div class="corner corner-bl"></div>
+              <div class="corner corner-br"></div>
+            </div>
+            <div class="about-badge">
+              <div class="about-badge-num">10+</div>
+              <div class="about-badge-txt">Yillik Tajriba</div>
+            </div>
+          </div>
+
+          <div class="about-text reveal-right">
+            <p class="section-label">Biz haqimizda</p>
+            <h2 class="section-title">Ishonchli <span>Hamkor</span></h2>
+            <p class="section-desc">
+              KYBERS.OS kiberxavfsizlik sohasida yetakchi kompaniya sifatida,
+              sizning raqamli aktivlaringizni zamonaviy tahdidlardan himoya
+              qilishga ixtisoslashganmiz. Tajribali jamoamiz va ilg'or
+              texnologiyalarimiz bilan ishonchli himoyani ta'minlaymiz.
+            </p>
+            <div class="about-points" id="aboutPoints"></div>
+            <div style="margin-top: 32px">
+              <a href="#contact" class="btn btn-primary">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+                Bog'lanish
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════
+     CONTACT
+════════════════════════════════════════════════════ -->
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="reveal" style="margin-bottom: 56px">
+          <p class="section-label">Murojaat</p>
+          <h2 class="section-title">Biz bilan <span>Bog'laning</span></h2>
+          <p class="section-desc">
+            Loyihangiz haqida so'zlashing. Mutaxassislarimiz 24 soat ichida
+            javob berishadi.
+          </p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-info reveal-left">
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path
+                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                  />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+              </div>
+              <div>
+                <div class="contact-label">Email</div>
+                <div class="contact-value">perdebaevadilbek586@gmail.com</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path
+                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <div class="contact-label">Telefon</div>
+                <div class="contact-value">+998 99 661 10 08</div>
+              </div>
+            </div>
+
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </div>
+              <div>
+                <div class="contact-label">Manzil</div>
+                <div class="contact-value">Nukus, Uzbekistan</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form reveal-right">
+            <div id="formSuccess" class="form-success">
+              <div class="success-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                  <polyline points="22 4 12 14.01 9 11.01" />
+                </svg>
+              </div>
+              <div class="success-title">Xabar Yuborildi!</div>
+              <p class="success-text">
+                Tez orada mutaxassislarimiz siz bilan bog'lanadi.
+              </p>
+            </div>
+
+            <form id="contactForm" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="inputName">Ismingiz</label>
+                  <input
+                    class="form-input"
+                    type="text"
+                    id="inputName"
+                    placeholder="Ism Familiya"
+                    autocomplete="name"
+                  />
+                  <div class="form-error" id="inputNameError"></div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="inputPhone">Telefon</label>
+                  <input
+                    class="form-input"
+                    type="tel"
+                    id="inputPhone"
+                    placeholder="+998 90 000 00 00"
+                    autocomplete="tel"
+                  />
+                  <div class="form-error" id="inputPhoneError"></div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="inputEmail">Email</label>
+                <input
+                  class="form-input"
+                  type="email"
+                  id="inputEmail"
+                  placeholder="siz@example.com"
+                  autocomplete="email"
+                />
+                <div class="form-error" id="inputEmailError"></div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="inputMsg">Xabar</label>
+                <textarea
+                  class="form-textarea"
+                  id="inputMsg"
+                  placeholder="Loyihangiz haqida qisqacha yozing..."
+                ></textarea>
+                <div class="form-error" id="inputMsgError"></div>
+              </div>
+
+              <button
+                type="submit"
+                class="btn btn-primary btn-submit"
+                id="submitBtn"
+              >
+                <span class="btn-text">Yuborish</span>
+                <div class="loading-spinner"></div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  class="btn-arrow"
+                >
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════ -->
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a href="#home" class="footer-logo">
+              <img
+                src="./images/logo.webp"
+                alt="Logo"
+                onerror="this.style.display = 'none'"
+              />
+              <span class="footer-logo-text">KYBERS.OS</span>
+            </a>
+            <p class="footer-desc">
+              Zamonaviy kiberxavfsizlik yechimlari bilan biznesingizni raqamli
+              tahdidlardan himoya qilamiz.
+            </p>
+            <div style="margin-top: 16px;">
+              <a href="https://t.me/ulken_admin" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 18px;background:rgba(255,0,0,0.1);border:1px solid rgba(255,0,0,0.3);border-radius:10px;color:var(--neon);text-decoration:none;font-size:0.85rem;font-family:var(--font-display);letter-spacing:0.05em;transition:all 0.3s ease;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                </svg>
+                @ulken_admin
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div class="footer-col-title">Havolalar</div>
+            <ul class="footer-links">
+              <li><a href="#home">Bosh sahifa</a></li>
+              <li><a href="#services">Xizmatlar</a></li>
+              <li><a href="#about">Biz haqimizda</a></li>
+              <li><a href="#contact">Aloqa</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <div class="footer-col-title">Aloqa</div>
+            <div class="footer-contact-item">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                />
+                <polyline points="22,6 12,13 2,6" />
+              </svg>
+              perdebaevadilbek586@gmail.com
+            </div>
+            <div class="footer-contact-item">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path
+                  d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+                />
+              </svg>
+              +998 99 661 10 08
+            </div>
+            <div class="footer-contact-item">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              Nukus, Uzbekistan
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <div class="footer-copy">
+            &copy; 2026 KYBERS.OS — Barcha huquqlar himoyalangan
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./js/main.js"></script>
+  </body>
+</html>

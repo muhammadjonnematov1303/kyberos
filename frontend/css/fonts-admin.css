@@ -1,0 +1,86 @@
+/* ============================================================
+   KYBERS.OS — Admin Panel Font Configuration
+   ============================================================ */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Roboto:wght@400;500;600;700&display=swap');
+
+/* Admin Font Variables */
+:root {
+  --font-admin-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-admin-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-admin-mono: 'JetBrains Mono', 'Courier New', monospace;
+  --font-admin-button: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Admin Panel Global */
+.admin-wrapper,
+.admin-wrapper body {
+  font-family: var(--font-admin-body);
+}
+
+/* Admin Headings */
+.admin-header-title,
+.section-title-sm,
+.admin-modal-title,
+.sidebar-logo-text {
+  font-family: var(--font-admin-heading);
+  font-weight: 700;
+}
+
+/* Admin Tables */
+.admin-table {
+  font-family: var(--font-admin-body);
+}
+
+.admin-table thead th {
+  font-family: var(--font-admin-heading);
+  font-weight: 600;
+}
+
+/* Admin Buttons */
+.btn-add,
+.btn-sm,
+.btn-save,
+.btn-cancel,
+.btn-logout {
+  font-family: var(--font-admin-button);
+}
+
+/* Admin Stats & Numbers */
+.stat-card-num,
+.badge,
+.sidebar-badge {
+  font-family: var(--font-admin-mono);
+}
+
+/* Admin Forms */
+.form-label {
+  font-family: var(--font-admin-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  font-family: var(--font-admin-body);
+}
+
+/* Admin Navigation */
+.sidebar-link {
+  font-family: var(--font-admin-body);
+  font-weight: 500;
+}
+
+.nav-section-title {
+  font-family: var(--font-admin-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+}
+
+/* Admin Time Display */
+.admin-header-time {
+  font-family: var(--font-admin-mono);
+}
