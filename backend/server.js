@@ -33,7 +33,7 @@ app.use('/api/apps',     appsRoutes);
 app.use('/api/payments', paymentsRoutes);
 app.use('/api/messages', messagesRoutes);
 
-app.get('/api', (_req, res) => res.json({ project: 'KYBEROS', version: '2.0.0', status: 'running' }));
+app.get('/api', (_req, res) => res.json({ project: 'KYBEROS', version: '2.0.1', status: 'running' }));
 app.get('/api/health', (_req, res) => res.json({ status: 'OK', timestamp: new Date() }));
 
 app.use((_req, res) => res.status(404).json({ message: 'Route not found' }));
